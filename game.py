@@ -1,4 +1,6 @@
+# copyright 2024
 import pygame
+
 pygame.init()
 
 win = pygame.display.set_mode((500,480))
@@ -56,14 +58,11 @@ class projectile(object):
         pygame.draw.circle(size, self.color, (self.x, self.y), self.radius)
 
 
-
-
 def redrawGameWindow():
     win.blit(bg, (0,0))
     manlike.draw(win)
     
     pygame.display.update()
-
 
 
 manlike = player(200, 410, 64,64)
