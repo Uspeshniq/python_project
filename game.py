@@ -1,16 +1,38 @@
 # copyright 2024
 import pygame
 
+pictures = "pictures/"
+
 pygame.init()
 
 win = pygame.display.set_mode((500,480))
 
 pygame.display.set_caption("First Game")
 
-walkRight = [pygame.image.load('R1.png'), pygame.image.load('R2.png'), pygame.image.load('R3.png'), pygame.image.load('R4.png'), pygame.image.load('R5.png'), pygame.image.load('R6.png'), pygame.image.load('R7.png'), pygame.image.load('R8.png'), pygame.image.load('R9.png')]
-walkLeft = [pygame.image.load('L1.png'), pygame.image.load('L2.png'), pygame.image.load('L3.png'), pygame.image.load('L4.png'), pygame.image.load('L5.png'), pygame.image.load('L6.png'), pygame.image.load('L7.png'), pygame.image.load('L8.png'), pygame.image.load('L9.png')]
-bg = pygame.image.load('bg.jpg')
-char = pygame.image.load('standing.png')
+walkRight = [
+    pygame.image.load(pictures + 'R1.png'), 
+    pygame.image.load(pictures + 'R2.png'), 
+    pygame.image.load(pictures + 'R3.png'), 
+    pygame.image.load(pictures + 'R4.png'), 
+    pygame.image.load(pictures + 'R5.png'), 
+    pygame.image.load(pictures + 'R6.png'), 
+    pygame.image.load(pictures + 'R7.png'), 
+    pygame.image.load(pictures + 'R8.png'), 
+    pygame.image.load(pictures + 'R9.png')]
+walkLeft = [
+    pygame.image.load(pictures + 'L1.png'), 
+    pygame.image.load(pictures + 'L2.png'), 
+    pygame.image.load(pictures + 'L3.png'), 
+    pygame.image.load(pictures + 'L4.png'), 
+    pygame.image.load(pictures + 'L5.png'), 
+    pygame.image.load(pictures + 'L6.png'), 
+    pygame.image.load(pictures + 'L7.png'), 
+    pygame.image.load(pictures + 'L8.png'), 
+    pygame.image.load(pictures + 'L9.png')]
+
+bg = pygame.image.load(pictures + 'bg.jpg')
+
+char = pygame.image.load(pictures + 'standing.png')
 
 clock = pygame.time.Clock()
 
@@ -33,12 +55,12 @@ class player(object):
         if self.walkCount + 1 >= 27:
             self.walkCount = 0
 
-        if not(self.standing):
+        if (self.standing):
             if self.left:
-                size.blit(walkLeft[self.walkCount//3], (self.x,self.y))
+                size.blit(walkLeft[self.walkCount // 3], (self.x, self.y))
                 self.walkCount += 1
             elif self.right:
-                size.blit(walkRight[self.walkCount//3], (self.x,self.y))
+                size.blit(walkRight[self.walkCount //3 ], (self.x, self.y))
                 self.walkCount +=1
             else:
                 if self.right:
@@ -65,7 +87,7 @@ def redrawGameWindow():
     pygame.display.update()
 
 
-manlike = player(200, 410, 64,64)
+manlike = player(200, 410, 64, 64)
 execute = True
 while execute:
     clock.tick(27)
