@@ -58,6 +58,38 @@ class projectile(object):
     def draw(self,win):
         pygame.draw.circle(win, self.color, (self.x,self.y), self.radius)
 
+class enemy(object):
+    walkRight = [pygame.image.load('C:/git/python_project/pictures/R1E.png'), pygame.image.load('C:/git/python_project/pictures/R2E.png'), pygame.image.load('C:/git/python_project/pictures/R3E.png'), pygame.image.load('C:/git/python_project/pictures/R4E.png'), pygame.image.load('C:/git/python_project/pictures/R5E.png'), pygame.image.load('C:/git/python_project/pictures/R6E.png'), pygame.image.load('C:/git/python_project/pictures/R7E.png'), pygame.image.load('C:/git/python_project/pictures/R8E.png'), pygame.image.load('C:/git/python_project/pictures/R9E.png'), pygame.image.load('C:/git/python_project/pictures/R10E.png'), pygame.image.load('C:/git/python_project/pictures/R11E.png')]
+    walkLeft = [pygame.image.load('C:/git/python_project/pictures/L1E.png'), pygame.image.load('C:/git/python_project/pictures/L2E.png'), pygame.image.load('C:/git/python_project/pictures/L3E.png'), pygame.image.load('C:/git/python_project/pictures/L4E.png'), pygame.image.load('C:/git/python_project/pictures/L5E.png'), pygame.image.load('C:/git/python_project/pictures/L6E.png'), pygame.image.load('C:/git/python_project/pictures/L7E.png'), pygame.image.load('C:/git/python_project/pictures/L8E.png'), pygame.image.load('C:/git/python_project/pictures/L9E.png'), pygame.image.load('C:/git/python_project/pictures/L10E.png'), pygame.image.load('C:/git/python_project/pictures/L11E.png')]
+    
+    def __init__(self, x, y, widht, height, end):
+        self.x = x
+        self.y = y
+        self.height = height
+        self.widht = widht
+        self.end = end
+        self.WalkCount = 0
+        self.speed = 3
+
+    def draw(self, size):
+        self.move()
+        if self.WalkCount + 1 >= 33:
+            self.WalkCount = 0
+
+        if self.speed > 0:
+            size.blit(self.walkRight[self.walkCount//3], (self.x, self.y))
+        else:
+            size.blit(self.walkLeft[self.WalkCount//3], (self.x, self.y))
+            self.walkCount += 1
+    
+    def move(self):
+        if self.speed > 0:
+            if self.x < self.path[1] + self.speed:
+                self.x += self.speed
+            else:
+                self.speed = self.speed * -1
+                self.x += self.speed
+                self.WalkCount = 0
 
 
 def redrawGameWindow():
@@ -71,6 +103,7 @@ def redrawGameWindow():
 
 #mainloop
 manlike = player(200, 410, 64,64)
+goblin = enemy(100, 410, 64, 64, 300)
 bullets = []
 run = True
 while run:
